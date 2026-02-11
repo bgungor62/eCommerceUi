@@ -10,14 +10,14 @@ export type RemoveFromCartDto = {
 };
 export type CartItemDto = {
   productId: number;
-  productName: string;
+  productName?: string | null;
   unitPrice: number;
   quantity: number;
   lineTotal: number;
-  imageUrl: string;
+  imageUrl?: string | null;
 };
 export type CartSummaryDto = {
-  items?: CartItemDto[];
+  items?: CartItemDto[] | null;
   totalPrice: number;
 };
 export async function addToCart(dto: AddToCartDto) {
@@ -34,8 +34,8 @@ export async function removeFromCart(dto: RemoveFromCartDto) {
   return data;
 }
 
-export async function getMyCart(): Promise<CartSummaryDto[]> {
-  const { data } = await api.get<CartSummaryDto[]>("/api/Cart/myCart");
+export async function getMyCart(): Promise<CartSummaryDto> {
+  const { data } = await api.get<CartSummaryDto>("/api/Cart/myCart");
   return data;
 }
 
